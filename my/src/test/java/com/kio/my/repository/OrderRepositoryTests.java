@@ -18,7 +18,7 @@ public class OrderRepositoryTests {
 
     @Test
     public void testInsert() {
-        IntStream.rangeClosed(1, 100).forEach(i -> {
+        IntStream.rangeClosed(1, 11).forEach(i -> {
 
             Ordered order = Ordered.builder().content("1,1~2,2~3,3").totalPrice((long) i)
                     .build();

@@ -1,6 +1,7 @@
 package com.kio.my.controller;
 
 
+import com.kio.my.domain.Menu;
 import com.kio.my.domain.Ordered;
 import com.kio.my.dto.MenuDTO;
 import com.kio.my.dto.OrderDTO;
@@ -40,8 +41,9 @@ public class AdminController {
     }
 
     @GetMapping("/menu/list")
-    public void menuList(Model model){
-        menuController.list(model);
+    @ResponseBody
+    public List<Menu> menuList(Model model){
+        return menuController.list(model);
     }
 
     @GetMapping("/order/list")
@@ -81,6 +83,18 @@ public class AdminController {
             log.info(e.getStackTrace());
         }
 
+    }
+
+    @GetMapping("/menu/page/{pageNumber}")
+    @ResponseBody
+    public List<Menu> getMenuPage(@PathVariable int pageNumber, Model model){
+        return menuController.getOnePage(pageNumber-1, model);
+    }
+
+    @GetMapping("/order/page/{pageNumber}")
+    @ResponseBody
+    public List<Ordered> getOrderPage(@PathVariable int pageNumber, Model model){
+        return orderController.getOnePage(pageNumber-1, model);
     }
 
 }

@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
@@ -52,4 +54,11 @@ public class OrderServiceImpl implements OrderService {
     public void deleteOrder(Long ono) {
        orderRepository.deleteById(ono);
     }
+
+    @Override
+    public Page<Ordered> getOnePage(int pageNumber) {
+        PageRequest pageRequest = PageRequest.of(pageNumber, 10);
+        return orderRepository.findAll(pageRequest);
+    }
+
 }

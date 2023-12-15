@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/menu")
@@ -23,13 +24,20 @@ public class MenuController {
 
     private final MenuService menuService;
 
-    @GetMapping("/list")
-    @ResponseBody
+
     public List<Menu> list(Model model){
 
         List<Menu> menuList = menuService.getMenuList(model);
 
         return menuList;
+    }
+
+    @GetMapping("/list")
+    @ResponseBody
+    public List<Menu> getAvailableMenuList(Model model){
+        List<Menu> menuList = menuService.getMenuList(model);
+        List<Menu> availableMenu = menuList.stream().filter(a -> a.getAvailable().equals("1")).toList();
+        return availableMenu;
     }
 
     public void updateMenu(MenuDTO menuDTO){
@@ -43,10 +51,10 @@ public class MenuController {
     }
 
 
-    @GetMapping("/page/{pageNumber}")
-    @ResponseBody
-    public List<Menu> getOnePage(@PathVariable int pageNumber){
+
+    public List<Menu> getOnePage(int pageNumber, Model model){
          Page<Menu> pm = menuService.getOnePage(pageNumber);
+         model.addAttribute("totalPage", pm.getTotalPages());
          return pm.stream().toList();
 
     }

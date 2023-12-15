@@ -18,7 +18,7 @@ public class MenuRepositoryTests {
 
     @Test
     public void testInsert() {
-        IntStream.rangeClosed(1, 100).forEach(i -> {
+        IntStream.rangeClosed(1, 11).forEach(i -> {
             Menu menu = Menu.builder().mname("name").price(i).mtype("type").build();
 
             Menu result = mr.save(menu);
