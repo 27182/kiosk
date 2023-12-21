@@ -18,11 +18,14 @@ public class MenuRepositoryTests {
 
     @Test
     public void testInsert() {
-        IntStream.rangeClosed(1, 11).forEach(i -> {
-            Menu menu = Menu.builder().mname("name").price(i).mtype("type").build();
+//        IntStream.rangeClosed(1, 11).forEach(i -> {
+//            Menu menu = Menu.builder().mname("name").price(i).mtype("type").build();
+//
+//            Menu result = mr.save(menu);
+//            log.info("MNO: " + result.getMno());
+//        });
 
-            Menu result = mr.save(menu);
-            log.info("MNO: " + result.getMno());
-        });
+        Menu menu = Menu.builder().mname("햄버거").price(2500).mtype("main").build();
+        mr.save(menu);
     }
 }

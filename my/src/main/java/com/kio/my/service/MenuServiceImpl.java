@@ -51,15 +51,14 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public void updateMenu(MenuDTO menuDTO) {
 
-        Optional<Menu> result = menuRepository.findById(menuDTO.getMno());
-
         Menu menu;
-        if(result.isEmpty()){
+        if(menuDTO.getMno() == null){
             menu = modelMapper.map(menuDTO, Menu.class);
         } else {
+        Optional<Menu> result = menuRepository.findById(menuDTO.getMno());
             menu = result.get();
             menu.changeOneMenuInfo(menuDTO.getMname(),menuDTO.getMtype(),menuDTO.getPrice()
-            ,menuDTO.getAvailable(),menuDTO.getRecommanded(),menuDTO.getStock(),menuDTO.getEtc());
+            ,menuDTO.getAvailable(),menuDTO.getRecommanded(),menuDTO.getStock(),menuDTO.getEtc(),menuDTO.getImgurl());
 
         }
         menuRepository.save(menu);

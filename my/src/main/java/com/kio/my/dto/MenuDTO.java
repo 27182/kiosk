@@ -23,6 +23,7 @@ public class MenuDTO {
     private String etc;
     private int price;
     private Long stock;
+    private String imgurl;
     private LocalDateTime regDate;
     private LocalDateTime modDate;
 }

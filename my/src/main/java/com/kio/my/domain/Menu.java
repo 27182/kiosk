@@ -42,8 +42,11 @@ public class Menu extends BaseEntity {
     @Column(length = 500)
     private String etc;
 
+    @Column(length = 500)
+    private String imgurl;
+
     public void changeOneMenuInfo(String mname, String mtype, int price, String available
-            , String recommanded, Long stock, String etc){
+            , String recommanded, Long stock, String etc, String imgurl){
 
         this.mname = mname;
         this.mtype = mtype;
@@ -52,6 +55,7 @@ public class Menu extends BaseEntity {
         this.recommanded = recommanded;
         this.stock = stock;
         this.etc = etc;
+        this.imgurl = imgurl;
     }
 
 

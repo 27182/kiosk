@@ -54,8 +54,9 @@ public class AdminController {
 
 
     @PostMapping("/menu/update")
-    public void updateMenu(@RequestBody MenuDTO menuDTO){
+    public String updateMenu(@RequestBody MenuDTO menuDTO){
         menuController.updateMenu(menuDTO);
+        return "/admin/admin";
     }
     @DeleteMapping("/menu/{mno}")
     public void deleteMenu(@PathVariable("mno") String mno){
