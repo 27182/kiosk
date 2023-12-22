@@ -1,7 +1,6 @@
 <template>
     <div class="admin-main-wrapper">
-        <AdminMainBody :isLoading="isLoading" :myData="myData"></AdminMainBody>
-        <AdminMainFooter></AdminMainFooter>
+        <AdminMainBody :isLoading="isLoading" :myMenuData="myMenuData" :myOrderData="myOrderData" @refresh="getAllData"></AdminMainBody>
     </div>
 
 
@@ -12,25 +11,53 @@
 
 <script setup>
 import AdminMainBody from '@/components/AdminMainBody.vue';
-import AdminMainFooter from '@/components/AdminMainFooter.vue';
 import axios from 'axios';
+import { watch } from 'vue';
 import {ref, onMounted} from 'vue'
 
 
-let myData = ref([]);
+let myMenuData = ref([]);
+let myOrderData = ref([]);
 let isLoading = ref(true);
+let loadingStack = ref(0);
 
 
 function getOrderData() {
   axios.get("/admin/order/list").then((d) => {
-    myData.value = d.data;
-    isLoading.value = false;
+    myOrderData.value = d.data;
+    myOrderData.value.forEach((a)=>{a.regDate = formatDate(a.regDate);});
+    loadingStack.value++;
+  })
+}
+function formatDate(value) {
+    return value.replace('T', ' ').substring(0, 19);
+}
+
+function getMenuData() {
+  axios.get("/admin/menu/list").then((d) => {
+    myMenuData.value = d.data;
+    myMenuData.value.forEach((a)=>{
+      a.regDate = formatDate(a.regDate); 
+      a.available == "1"? a.available = "가능" : a.available = "불가";
+      a.recommanded == "1"? a.recommanded = "O" : a.recommanded = "X";
+    
+    });
+    loadingStack.value++;
   })
 }
 
+function getAllData(){
+  getMenuData();
+  getOrderData();
+}
+
 onMounted(() => {
+  getMenuData();
   getOrderData();
 });
+
+
+watch(loadingStack,()=>{if(loadingStack.value == 2) isLoading.value = false;})
 
 
 </script>
