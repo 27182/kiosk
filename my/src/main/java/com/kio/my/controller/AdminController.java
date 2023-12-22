@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 @Log4j2
 @RequiredArgsConstructor
@@ -59,13 +59,15 @@ public class AdminController {
         return "/admin/admin";
     }
     @DeleteMapping("/menu/{mno}")
-    public void deleteMenu(@PathVariable("mno") String mno){
+    public String deleteMenu(@PathVariable("mno") String mno){
 
         try {
             menuController.deleteMenu(Long.parseLong(mno));
         } catch (NumberFormatException e){
             log.info(e.getStackTrace());
         }
+
+        return "admin/admin";
 
     }
 
@@ -75,7 +77,7 @@ public class AdminController {
         orderController.updateOrder(orderDTO);
 
     }
-    @DeleteMapping("/menu/{ono}")
+    @DeleteMapping("/order/{ono}")
     public void deleteOrder(@PathVariable("ono") String ono){
 
         try {
@@ -83,6 +85,7 @@ public class AdminController {
         } catch (NumberFormatException e){
             log.info(e.getStackTrace());
         }
+
 
     }
 

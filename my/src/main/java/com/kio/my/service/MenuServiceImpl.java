@@ -52,6 +52,7 @@ public class MenuServiceImpl implements MenuService {
     public void updateMenu(MenuDTO menuDTO) {
 
         Menu menu;
+        log.info(menuDTO);
         if(menuDTO.getMno() == null){
             menu = modelMapper.map(menuDTO, Menu.class);
         } else {
