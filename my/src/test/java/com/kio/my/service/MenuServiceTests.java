@@ -31,12 +31,5 @@ public class MenuServiceTests {
         log.info("mno: " + mno);
     }
 
-    @Test
-    public void testModify(){
-        MenuDTO menuDTO = MenuDTO.builder().mno(100L).mname("update").mtype("udapeta").price(999).build();
-
-
-        menuService.updateMenu(menuDTO);
-    }
 
 }

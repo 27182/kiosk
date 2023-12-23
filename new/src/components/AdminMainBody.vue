@@ -10,7 +10,7 @@
           <v-text-field v-model="search" label="Search" prepend-inner-icon="mdi-magnify" single-line variant="outlined"
             hide-details style="width: 70%; display: inline-block;"></v-text-field>
 
-          <v-data-table v-if="n == 2" :items="myOrderData" :headers="orderHeaders" :search="search"
+          <v-data-table v-show="n == 2" :items="myOrderData" :headers="orderHeaders" :search="search"
             :sort-by="[{ key: 'ono', order: 'desc' }]">
             <template v-slot:[`item.actions`]="{ item }">
               <v-icon v-if="false" size="small" class="me-2" @click="console.log(item)">
@@ -22,7 +22,7 @@
             </template>
           </v-data-table>
           <span>
-            <v-data-table v-if="n == 1" :items="myMenuData" :headers="menuHeaders" :search="search">
+            <v-data-table v-show="n == 1" :items="myMenuData" :headers="menuHeaders" :search="search">
               <template v-slot:[`item.actions`]="{ item }">
                 <v-icon size="small" class="me-2" @click="showDialog1(item)">
                   mdi-pencil
@@ -219,14 +219,17 @@ let new_item = ref(null);
 function closePopUp() {
   popup1.value = false;
   popup2.value = false;
-  new_item.value = {
-    mname: "",
-    mtype: "",
-    imgurl: "",
-    price: 0,
-    available: "",
-    recommanded: "",
-  };
+  setTimeout(()=>{
+
+    new_item.value = {
+      mname: "",
+      mtype: "",
+      imgurl: "",
+      price: 0,
+      available: "",
+      recommanded: "",
+    };
+  },300);
 }
 
 function showDialog1(item) {
@@ -241,15 +244,16 @@ function showDialog2() {
 
 function updateMenu() {
   if (
-    new_item.value.mname === ""
-    || new_item.value.mtype === ""
-    || new_item.value.recommanded === ""
-    || new_item.value.available0 === ""
-    || new_item.value.price === 0
-    || isNaN(new_item.value.price)
+    cur_item.value.mname === ""
+    || cur_item.value.mtype === ""
+    || cur_item.value.recommanded === ""
+    || cur_item.value.available0 === ""
+    || cur_item.value.price === 0
+    || isNaN(cur_item.value.price)
 
   ) {
     alert("FAIL!");
+    console.log(new_item);
   } else {
   axios.post('/admin/menu/update', {
       'mno': cur_item.value.mno,
@@ -259,6 +263,7 @@ function updateMenu() {
       'available': (cur_item.value.available === "가능" ? "1" : "0"),
       'recommanded': (cur_item.value.recommanded === "O" ? "1" : "0"),
     }).then(()=>{emit("refresh")});
+    closePopUp();
   }
 
 }
@@ -284,6 +289,7 @@ function insertMenu() {
       'recommanded': (new_item.value.recommanded === "O" ? "1" : "0"),
       'imgurl': new_item.value.imgurl,
     }).then(()=>{emit("refresh")});
+    closePopUp();
   }
 
 }

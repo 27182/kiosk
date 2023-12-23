@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void updateOrder(OrderDTO orderDTO) {
+    public Long updateOrder(OrderDTO orderDTO) {
         Optional<Ordered> result = orderRepository.findById(orderDTO.getOno());
 
         Ordered ordered;
@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
             ordered.changeOneOrder(orderDTO.getContent(),orderDTO.getTotalPrice(),orderDTO.getEtc());
 
         }
-        orderRepository.save(ordered);
+        return orderRepository.save(ordered).getOno();
 
     }
 

@@ -9,10 +9,14 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@Controller
+@RestController
 @Log4j2
 @RequiredArgsConstructor
 public class OrderController {
@@ -28,10 +32,22 @@ public class OrderController {
 
     }
 
-    public void updateOrder(OrderDTO orderDTO){
+    @PostMapping("/order")
+    public Map<Object,Object> updateOrder(OrderDTO orderDTO){
 
-        orderService.updateOrder(orderDTO);
+        boolean isSuccess = true;
+        long ono = 0;
+        Map<Object,Object> result = new HashMap<>();
 
+        try {
+            ono = orderService.updateOrder(orderDTO);
+            result.put("isSuccess",isSuccess);
+            result.put("ono", ono);
+        } catch(Exception e){
+            isSuccess = false;
+            result.put("isSuccess",isSuccess);
+        }
+        return result;
     }
 
     public void deleteOrder(Long ono){

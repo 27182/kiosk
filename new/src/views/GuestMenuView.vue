@@ -3,7 +3,7 @@
     <div>
       <v-card variant="flat" >
         <MenuListBody :isLoading="isLoading" :myData="myData" @add-to-cart="addMenutoCart"></MenuListBody>
-        <MenuListFooter @delete-from-cart="deletefromCart" :myCart="myCart"></MenuListFooter>
+        <MenuListFooter @go-to-pay="gotoPay" @delete-from-cart="deletefromCart" :myCart="myCart"></MenuListFooter>
       </v-card>
     </div>
   </div>
@@ -15,6 +15,7 @@ import axios from 'axios';
 import { ref } from "vue";
 import MenuListBody from '@/components/MenuListBody.vue'
 import MenuListFooter from '@/components/MenuListFooter.vue'
+import { useRouter } from 'vue-router';
 
 
 let myData = ref([]);
@@ -26,6 +27,19 @@ function getData() {
     myData.value = d.data;
     isLoading.value = false;
   })
+}
+const router = useRouter();
+
+function gotoPay(){
+  let cartState = myCart.value.map(i => {
+    let a  = i.get('menu').mname;
+    let b = i.get('amount');
+    let c  = i.get('menu').price * b;
+    return [a,b,c];
+  });
+  router.push({path: '/result', name: 'result' , state: {
+      myCart: cartState,
+    }});
 }
 
 
@@ -42,9 +56,7 @@ onMounted(() => {
 
 
 function deletefromCart(i){
-  console.log(i);
   myCart.value.splice(i,1);
-  console.log(myCart);
 }
 
 

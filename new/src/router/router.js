@@ -2,14 +2,16 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MenuListView from '@/views/GuestMenuView.vue'
 import MainView from '@/views/MainView.vue'
 import AdminMainView from '@/views/AdminMainView.vue'
+import GuestResultView from '@/views/GuestResultView.vue'
 
 
 
 
 
 const routes = [
-    { path: '/', component: MainView },
+    { path: '/', component: MainView, name: 'main' },
     { path: '/menu', component: MenuListView },
+    { path: '/result', component: GuestResultView, name: 'result'  },
     { path: '/admin', component: AdminMainView },
   
   ]

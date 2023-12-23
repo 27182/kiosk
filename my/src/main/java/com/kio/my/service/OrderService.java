@@ -11,7 +11,7 @@ public interface OrderService {
 
     List<Ordered> getOrderList();
 
-    void updateOrder(OrderDTO orderDTO);
+    Long updateOrder(OrderDTO orderDTO);
 
     void deleteOrder(Long ono);
 

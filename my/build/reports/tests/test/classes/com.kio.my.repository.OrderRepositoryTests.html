@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.472s</div>
+<div class="counter">0.014s</div>
 <p>duration</p>
 </div>
 </td>
@@ -66,9 +66,6 @@
 <li>
 <a href="#tab1">Standard output</a>
 </li>
-<li>
-<a href="#tab2">Standard error</a>
-</li>
 </ul>
 <div id="tab0" class="tab">
 <h2>Tests</h2>
@@ -82,7 +79,7 @@
 </thead>
 <tr>
 <td class="success">testInsert()</td>
-<td class="success">0.472s</td>
+<td class="success">0.014s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -90,33 +87,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>17:39:43.818 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.kio.my.repository.OrderRepositoryTests]: OrderRepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-17:39:43.903 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.kio.my.MyApplication for test class com.kio.my.repository.OrderRepositoryTests
-
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v3.2.0)
-
-2023-12-21T17:39:44.246+09:00  INFO 19312 --- [    Test worker] c.k.my.repository.OrderRepositoryTests   : Starting OrderRepositoryTests using Java 21.0.1 with PID 19312 (started by 201-14 in C:\Users\201-14\IdeaProjects\my)
-2023-12-21T17:39:44.247+09:00  INFO 19312 --- [    Test worker] c.k.my.repository.OrderRepositoryTests   : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2023-12-21T17:39:44.736+09:00  INFO 19312 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-12-21T17:39:44.784+09:00  INFO 19312 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 41 ms. Found 2 JPA repository interfaces.
-2023-12-21T17:39:45.143+09:00  INFO 19312 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-12-21T17:39:45.195+09:00  INFO 19312 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
-2023-12-21T17:39:45.225+09:00  INFO 19312 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2023-12-21T17:39:45.432+09:00  INFO 19312 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-12-21T17:39:45.454+09:00  INFO 19312 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-12-21T17:39:45.528+09:00  INFO 19312 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@79d4ff58
-2023-12-21T17:39:45.529+09:00  INFO 19312 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-12-21T17:39:46.200+09:00  INFO 19312 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2023-12-21T17:39:46.238+09:00  INFO 19312 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-12-21T17:39:46.542+09:00  INFO 19312 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-12-21T17:39:47.028+09:00  WARN 19312 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-12-21T17:39:47.333+09:00  INFO 19312 --- [    Test worker] c.k.my.repository.OrderRepositoryTests   : Started OrderRepositoryTests in 3.267 seconds (process running for 4.244)
+<pre>2023-12-23T15:17:25.632+09:00  INFO 4740 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.kio.my.repository.OrderRepositoryTests]: OrderRepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-23T15:17:25.634+09:00  INFO 4740 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.kio.my.MyApplication for test class com.kio.my.repository.OrderRepositoryTests
 Hibernate: 
     insert 
     into
@@ -124,7 +96,7 @@ Hibernate:
         (content, moddate, regdate, total_price) 
     values
         (?, ?, ?, ?)
-2023-12-21T17:39:47.804+09:00  INFO 19312 --- [    Test worker] c.k.my.repository.OrderRepositoryTests   : ONO: 113
+2023-12-23T15:17:25.645+09:00  INFO 4740 --- [    Test worker] c.k.my.repository.OrderRepositoryTests   : ONO: 3
 Hibernate: 
     insert 
     into
@@ -132,17 +104,7 @@ Hibernate:
         (content, moddate, regdate, total_price) 
     values
         (?, ?, ?, ?)
-2023-12-21T17:39:47.808+09:00  INFO 19312 --- [    Test worker] c.k.my.repository.OrderRepositoryTests   : ONO: 114
-</pre>
-</span>
-</div>
-<div id="tab2" class="tab">
-<h2>Standard error</h2>
-<span class="code">
-<pre>WARNING: A Java agent has been loaded dynamically (C:\Users\201-14\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.10\90ed94ac044ea8953b224304c762316e91fd6b31\byte-buddy-agent-1.14.10.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
+2023-12-23T15:17:25.648+09:00  INFO 4740 --- [    Test worker] c.k.my.repository.OrderRepositoryTests   : ONO: 4
 </pre>
 </span>
 </div>
@@ -154,7 +116,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.5</a> at 2023. 12. 21. 오후 5:39:47</p>
+<a href="http://www.gradle.org">Gradle 8.5</a> at 2023. 12. 23. 오후 3:17:25</p>
 </div>
 </div>
 </body>

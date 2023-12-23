@@ -16,7 +16,7 @@
                 </div> 
             </div> 
 
-            <v-btn class="pay-btn" variant="tonal" height="13vh" 
+            <v-btn class="pay-btn" variant="tonal" height="13vh" @click="gotoPay" :disabled="cartisempty"
             style=" background-color: rgb(179, 176, 189); font-weight: bolder;  margin: 1vh 1vw;">
             결제하기
         </v-btn>
@@ -37,7 +37,7 @@ const props = defineProps(['myCart']);
 
 computed(() => { return props.myCart })
 
-const emit = defineEmits(['delete-from-cart']);
+const emit = defineEmits(['delete-from-cart','go-to-pay']);
 
 
 function deletefromCart(i){
@@ -46,6 +46,8 @@ function deletefromCart(i){
 
 let totalPrice = ref(0);
 
+let cartisempty = ref(true);
+
 watch(props.myCart, (newCart)=>{
     let tmp = 0;
     for(let i = 0; i < newCart.length ; i++){
@@ -53,6 +55,15 @@ watch(props.myCart, (newCart)=>{
     }
     totalPrice.value = tmp;
 })
+
+watch(props.myCart,()=>{
+    props.myCart.length == 0? cartisempty.value = true : cartisempty.value = false;
+})
+
+
+function gotoPay(){
+    emit('go-to-pay');
+}
 
 </script>
 
