@@ -6,6 +6,8 @@
                 <v-icon class="mb-6" color="success" icon="mdi-check-circle-outline" size="128"></v-icon>
                 <div class="text-h4 font-weight-bold">주문이 접수되었습니다!</div>
             </div>
+            <div class="text-h6 font-weight-bold">주문 번호</div>
+            <div class="text-h3 font-weight-bold mb-5">{{ ono }}</div>
 
             <span>
                 <v-table>
@@ -34,7 +36,7 @@
                         <tr style="font-weight: bold;">
                             <td></td>
                             <td></td>
-                            <td>총합 ￦{{total}}</td>
+                            <td>총합 ￦{{total.toLocaleString()}}</td>
                         </tr>
                     </tfoot>
                 </v-table>
@@ -68,8 +70,10 @@ onMounted(() => {
     for(let i = 0  ; i < myCart.value.length ; i++){
         total.value += myCart.value[i][2];
     }
+    ono.value = history.state.ono;
+    
 })
-
+let ono = ref(0);
 let total = ref(0);
 let myCart = ref([]);
 

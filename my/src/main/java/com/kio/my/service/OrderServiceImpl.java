@@ -36,17 +36,22 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Long updateOrder(OrderDTO orderDTO) {
-        Optional<Ordered> result = orderRepository.findById(orderDTO.getOno());
-
+        
         Ordered ordered;
-        if(result.isEmpty()){
+        log.info(orderDTO);
+        if(orderDTO.getOno() == null){
             ordered = modelMapper.map(orderDTO, Ordered.class);
         } else {
+            Optional<Ordered> result = orderRepository.findById(orderDTO.getOno());
             ordered = result.get();
             ordered.changeOneOrder(orderDTO.getContent(),orderDTO.getTotalPrice(),orderDTO.getEtc());
 
         }
-        return orderRepository.save(ordered).getOno();
+
+        log.info(ordered);
+
+        Ordered saved = orderRepository.save(ordered);
+        return saved.getOno();
 
     }
 

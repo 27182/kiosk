@@ -119,7 +119,7 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-text-field v-model="new_item.imgurl" label="메뉴 사진"></v-text-field>
+                <v-file-input label="메뉴 사진" accept="image/jpg, image/jpeg, image/png, image/gif"></v-file-input>
               </v-row>
             </v-container>
           </v-card-text>
@@ -140,11 +140,13 @@
 
 
   </v-card>
+  <admin-main-footer></admin-main-footer>
 </template>
 
 <script setup>
 import axios from 'axios';
 import { ref, defineProps, computed, onMounted, defineEmits } from 'vue'
+import AdminMainFooter from './AdminMainFooter.vue';
 
 onMounted(() => {
   new_item.value = {

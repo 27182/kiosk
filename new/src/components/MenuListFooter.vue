@@ -12,7 +12,7 @@
                     <span>
                         {{ menu_map.get('menu').mname }} &nbsp;&nbsp;&nbsp; {{ menu_map.get('amount') }} 개 &nbsp;&nbsp;&nbsp; ￦{{ ((menu_map.get('amount') * menu_map.get('menu').price)).toLocaleString() }}
                     </span>
-                    <v-btn @click="()=>deletefromCart(i)" class="ml-10" size="small" variant="flat" text="취소"></v-btn>
+                    <v-btn @click="()=>deletefromCart(i)" class="ml-10" size="small" variant="tonal" text="취소"></v-btn>
                 </div> 
             </div> 
 

@@ -17,10 +17,10 @@
             <v-container fluid>
               <v-row>
                 <v-col v-for="i in myData" :key="i" cols="4" v-show="i.recommanded === '1'">
-                  <v-card class="menu-card" hover>
+                  <v-card class="menu-card" hover @click="() => MenuClicked(i)">
                     <v-responsive aspect-ratio="1">
-                      <v-img aspect-ratio="1" @click="() => MenuClicked(i)"
-                        :src="i.imgurl">
+                      <v-img aspect-ratio="1" 
+                        :src="getImageSource(i.mno)">
                       </v-img>
                       
                       <v-card-title class="mt-n12" style="width: 100%;">
@@ -30,7 +30,7 @@
                         &nbsp;
                       </div>
                       <v-card-title class="mt-n12">
-                        ￦{{ i.price }}
+                        ￦{{ i.price.toLocaleString() }}
                       </v-card-title>
                       
                     </v-responsive>
@@ -47,10 +47,10 @@
             <v-container fluid>
               <v-row>
                 <v-col v-for="i in myData" :key="i" cols="4" v-show="(i.mtype === 'main' && n === 2) || (i.mtype === 'side' && n === 3) || (i.mtype === 'drink' && n === 4)">
-                  <v-card class="menu-card" hover>
+                  <v-card class="menu-card" hover @click="() => MenuClicked(i)">
                     <v-responsive aspect-ratio="1">
-                      <v-img aspect-ratio="1" @click="() => MenuClicked(i)"
-                        :src="i.imgurl">
+                      <v-img aspect-ratio="1" 
+                        :src="getImageSource(i.mno)">
                       </v-img>
                       
                       <v-card-title class="mt-n12" style="width: 100%;">
@@ -60,7 +60,7 @@
                         &nbsp;
                       </div>
                       <v-card-title class="mt-n12">
-                        ￦{{ i.price }}
+                        ￦{{ i.price.toLocaleString() }}
                       </v-card-title>
                       
                     </v-responsive>
@@ -127,6 +127,11 @@ let isActive = ref(false);
 let amount = ref(1);
 
 let currentMenu = ref(null);
+
+
+function getImageSource(i){
+    return "assets/menu_img/" + i.toString() + ".png";
+}
 
 
 function MenuClicked(i) {

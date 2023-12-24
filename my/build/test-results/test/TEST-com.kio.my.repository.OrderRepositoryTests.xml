@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.kio.my.repository.OrderRepositoryTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-12-23T06:17:25" hostname="DESKTOP-GR2UP1N" time="0.014">
+<testsuite name="com.kio.my.repository.OrderRepositoryTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-12-24T09:27:26" hostname="DESKTOP-GR2UP1N" time="0.011">
   <properties/>
-  <testcase name="testInsert()" classname="com.kio.my.repository.OrderRepositoryTests" time="0.014"/>
-  <system-out><![CDATA[2023-12-23T15:17:25.632+09:00  INFO 4740 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.kio.my.repository.OrderRepositoryTests]: OrderRepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2023-12-23T15:17:25.634+09:00  INFO 4740 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.kio.my.MyApplication for test class com.kio.my.repository.OrderRepositoryTests
+  <testcase name="testInsert()" classname="com.kio.my.repository.OrderRepositoryTests" time="0.011"/>
+  <system-out><![CDATA[2023-12-24T18:27:26.499+09:00  INFO 7484 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.kio.my.repository.OrderRepositoryTests]: OrderRepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-12-24T18:27:26.501+09:00  INFO 7484 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.kio.my.MyApplication for test class com.kio.my.repository.OrderRepositoryTests
 Hibernate: 
     insert 
     into
@@ -11,15 +11,7 @@ Hibernate:
         (content, moddate, regdate, total_price) 
     values
         (?, ?, ?, ?)
-2023-12-23T15:17:25.645+09:00  INFO 4740 --- [    Test worker] c.k.my.repository.OrderRepositoryTests   : ONO: 3
-Hibernate: 
-    insert 
-    into
-        ordered
-        (content, moddate, regdate, total_price) 
-    values
-        (?, ?, ?, ?)
-2023-12-23T15:17:25.648+09:00  INFO 4740 --- [    Test worker] c.k.my.repository.OrderRepositoryTests   : ONO: 4
+2023-12-24T18:27:26.513+09:00  INFO 7484 --- [    Test worker] c.k.my.repository.OrderRepositoryTests   : ONO: 21
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

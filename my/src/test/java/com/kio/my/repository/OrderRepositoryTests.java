@@ -18,13 +18,13 @@ public class OrderRepositoryTests {
 
     @Test
     public void testInsert() {
-        IntStream.rangeClosed(1, 2).forEach(i -> {
+ 
 
-            Ordered order = Ordered.builder().content("{햄버거:2, 치즈버거:35, 베이컨 토마토 디럭스:30, 후렌치 후라이: 3, 코카-콜라: 353}").totalPrice((long) i)
+            Ordered order = Ordered.builder().content("{햄버거:2, 치즈버거:35, 베이컨 토마토 디럭스:30, 후렌치 후라이: 3, 코카-콜라: 353}").totalPrice((long) 5400)
                     .build();
 
             Ordered result = or.save(order);
             log.info("ONO: " + result.getOno());
-        });
+        
     }
 }

@@ -31,15 +31,38 @@ function getData() {
 const router = useRouter();
 
 function gotoPay(){
+  let content = {};
+  let totalPrice = 0;
   let cartState = myCart.value.map(i => {
     let a  = i.get('menu').mname;
     let b = i.get('amount');
     let c  = i.get('menu').price * b;
+    content[a] =  b.toString() +"개";
+    totalPrice += c;
     return [a,b,c];
   });
-  router.push({path: '/result', name: 'result' , state: {
-      myCart: cartState,
-    }});
+
+
+  const data = {
+    'content': JSON.stringify(content).replace(/['"]+/g, ''),
+    'totalPrice': totalPrice,
+  }
+
+
+
+  axios.post('/order', data
+  
+  ).then((res)=>{
+    if(res.data.isSuccess){
+      router.push({path: '/result', name: 'result' , state: {
+          ono: res.data.ono,
+          myCart: cartState,
+        }});
+    } else {
+      alert('오류: 주문 접수 실패');
+    }
+
+  } )
 }
 
 

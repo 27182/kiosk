@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class OrderController {
     }
 
     @PostMapping("/order")
-    public Map<Object,Object> updateOrder(OrderDTO orderDTO){
+    public Map<Object,Object> updateOrder(@RequestBody OrderDTO orderDTO){
 
         boolean isSuccess = true;
         long ono = 0;
@@ -44,6 +45,7 @@ public class OrderController {
             result.put("isSuccess",isSuccess);
             result.put("ono", ono);
         } catch(Exception e){
+            log.info(e);
             isSuccess = false;
             result.put("isSuccess",isSuccess);
         }
