@@ -13,7 +13,7 @@
       </div>
       <v-window v-if="!isLoading" v-model="currentTab">
         <v-window-item v-for="n in 4" :key="n" :value="n">
-          <span v-if="n == 1">
+          <span v-show="n == 1">
             <v-container fluid>
               <v-row>
                 <v-col v-for="i in myData" :key="i" cols="4" v-show="i.recommanded === '1'">
@@ -43,7 +43,7 @@
           </span>
 
 
-          <span v-if="n !== 1">
+          <span v-show="n !== 1">
             <v-container fluid>
               <v-row>
                 <v-col v-for="i in myData" :key="i" cols="4" v-show="(i.mtype === 'main' && n === 2) || (i.mtype === 'side' && n === 3) || (i.mtype === 'drink' && n === 4)">

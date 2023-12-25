@@ -57,7 +57,7 @@ onMounted(() => {
 });
 
 
-watch(loadingStack,()=>{if(loadingStack.value == 2) isLoading.value = false;})
+watch(loadingStack,()=>{if(loadingStack.value == 2) isLoading.value = false;});
 
 
 </script>

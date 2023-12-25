@@ -4,6 +4,9 @@
       <v-tab :value="1">메뉴 관리</v-tab>
       <v-tab :value="2">주문 내역</v-tab>
     </v-tabs>
+    <div class="loading-progress" v-if="isLoading">
+        <v-progress-circular indeterminate></v-progress-circular>
+      </div>
     <v-window v-if="!isLoading" v-model="currentTab">
       <v-window-item v-for="n in 2" :key="n" :value="n">
         <v-container fluid>
@@ -316,3 +319,14 @@ export default {
 }
 </script>
 
+
+<style scoped>
+
+.loading-progress {
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+</style>
