@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -54,10 +55,15 @@ public class AdminController {
 
 
     @PostMapping("/menu/update")
-    public String updateMenu(@RequestBody MenuDTO menuDTO){
-        menuController.updateMenu(menuDTO);
+    public String updateMenu(@RequestPart(value ="file", required = false) MultipartFile file,@RequestPart(value = "menuDTO", required = true) MenuDTO menuDTO){
+        menuController.updateMenu(menuDTO,file);
         return "/admin/admin";
     }
+
+
+
+
+
     @DeleteMapping("/menu/{mno}")
     public String deleteMenu(@PathVariable("mno") String mno){
 

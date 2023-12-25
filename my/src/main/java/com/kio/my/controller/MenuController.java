@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,9 +41,9 @@ public class MenuController {
         return availableMenu;
     }
 
-    public void updateMenu(MenuDTO menuDTO){
+    public void updateMenu(MenuDTO menuDTO, MultipartFile file){
 
-        menuService.updateMenu(menuDTO);
+        menuService.updateMenu(menuDTO ,file);
 
     }
 

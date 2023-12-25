@@ -7,12 +7,14 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +28,9 @@ public class MenuServiceImpl implements MenuService {
     private final ModelMapper modelMapper;
 
     private final MenuRepository menuRepository;
+
+    @Value("${file.upload.directory}")
+    String uploadPath;
 
 
     @Override
@@ -49,10 +54,10 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public void updateMenu(MenuDTO menuDTO) {
+    public void updateMenu(MenuDTO menuDTO, MultipartFile file) {
 
         Menu menu;
-        log.info(menuDTO);
+
         if(menuDTO.getMno() == null){
             menu = modelMapper.map(menuDTO, Menu.class);
         } else {
@@ -62,7 +67,21 @@ public class MenuServiceImpl implements MenuService {
             ,menuDTO.getAvailable(),menuDTO.getRecommanded(),menuDTO.getStock(),menuDTO.getEtc(),menuDTO.getImgurl());
 
         }
-        menuRepository.save(menu);
+        Menu result = menuRepository.save(menu);
+
+        // 파일 처리
+            if(file != null){
+                File saveFile = new File(uploadPath, result.getMno().toString());
+                try{
+                    file.transferTo(saveFile);
+                }  catch(Exception e ){
+                    log.info(e);
+                }
+            }
+
+
+
+        // 여기까지
 
 
     }

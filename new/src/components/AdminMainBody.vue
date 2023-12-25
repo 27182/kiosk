@@ -5,8 +5,8 @@
       <v-tab :value="2">주문 내역</v-tab>
     </v-tabs>
     <div class="loading-progress" v-if="isLoading">
-        <v-progress-circular indeterminate></v-progress-circular>
-      </div>
+      <v-progress-circular indeterminate></v-progress-circular>
+    </div>
     <v-window v-if="!isLoading" v-model="currentTab">
       <v-window-item v-for="n in 2" :key="n" :value="n">
         <v-container fluid>
@@ -122,7 +122,7 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-file-input label="메뉴 사진" accept="image/jpg, image/jpeg, image/png, image/gif"></v-file-input>
+                <v-file-input id="img" label="메뉴 사진" accept="image/jpg, image/jpeg, image/png, image/gif"></v-file-input>
               </v-row>
             </v-container>
           </v-card-text>
@@ -179,14 +179,14 @@ computed(() => { return props.isLoading });
 const rules = [
   value => {
     if (value) return true;
-      return 'invalid value';
+    return 'invalid value';
   }]
 
 const priceRules = [
   value => {
     if (!isNaN(value)) return true;
-      return 'invalid value'
-  
+    return 'invalid value'
+
   }]
 
 
@@ -215,7 +215,6 @@ let search = ref('');
 
 
 
-
 let cur_item = ref(null);
 let popup1 = ref(false);
 let popup2 = ref(false);
@@ -224,7 +223,8 @@ let new_item = ref(null);
 function closePopUp() {
   popup1.value = false;
   popup2.value = false;
-  setTimeout(()=>{
+
+  setTimeout(() => {
 
     new_item.value = {
       mname: "",
@@ -234,7 +234,7 @@ function closePopUp() {
       available: "",
       recommanded: "",
     };
-  },300);
+  }, 300);
 }
 
 function showDialog1(item) {
@@ -252,7 +252,7 @@ function updateMenu() {
     cur_item.value.mname === ""
     || cur_item.value.mtype === ""
     || cur_item.value.recommanded === ""
-    || cur_item.value.available0 === ""
+    || cur_item.value.available === ""
     || cur_item.value.price === 0
     || isNaN(cur_item.value.price)
 
@@ -260,18 +260,19 @@ function updateMenu() {
     alert("FAIL!");
     console.log(new_item);
   } else {
-  axios.post('/admin/menu/update', {
+    axios.post('/admin/menu/update', {
       'mno': cur_item.value.mno,
       'mname': cur_item.value.mname,
       'mtype': cur_item.value.mtype,
       'price': cur_item.value.price,
       'available': (cur_item.value.available === "가능" ? "1" : "0"),
       'recommanded': (cur_item.value.recommanded === "O" ? "1" : "0"),
-    }).then(()=>{emit("refresh")});
+    }).then(() => { emit("refresh") });
     closePopUp();
   }
 
 }
+
 
 function insertMenu() {
 
@@ -286,14 +287,41 @@ function insertMenu() {
   ) {
     alert("FAIL!");
   } else {
-    axios.post('/admin/menu/update', {
+
+    // axios.post('/admin/menu/update', {
+    //   'mname': new_item.value.mname,
+    //   'mtype': new_item.value.mtype,
+    //   'price': new_item.value.price,
+    //   'available': (new_item.value.available === "가능" ? "1" : "0"),
+    //   'recommanded': (new_item.value.recommanded === "O" ? "1" : "0"),
+    //   'imgurl': new_item.value.imgurl,
+    // }).then(()=>{emit("refresh")});
+
+    let menuDTO = {
       'mname': new_item.value.mname,
       'mtype': new_item.value.mtype,
       'price': new_item.value.price,
       'available': (new_item.value.available === "가능" ? "1" : "0"),
       'recommanded': (new_item.value.recommanded === "O" ? "1" : "0"),
       'imgurl': new_item.value.imgurl,
-    }).then(()=>{emit("refresh")});
+    }
+
+    const formData = new FormData();
+    const json = JSON.stringify(menuDTO);
+    const blob = new Blob([json], {type: "application/json"});
+    formData.append("menuDTO", blob);
+    if(document.getElementById("img").files[0] !== null){
+      formData.append("file", document.getElementById("img").files[0]);
+    }
+
+    axios.post('/admin/menu/update', formData, {
+      headers: {
+        "Content-Type": `multipart/form-data`,
+      },
+    }).then(() => { emit("refresh") });
+
+
+
     closePopUp();
   }
 
@@ -301,11 +329,11 @@ function insertMenu() {
 
 function confirmDelete(item, i) {
   if (confirm('정말 삭제하시겠습니까?')) {
-    if(i == 1 ){
-      axios.delete('/admin/menu/' + item.mno, {}).then(()=>{emit("refresh")});
+    if (i == 1) {
+      axios.delete('/admin/menu/' + item.mno, {}).then(() => { emit("refresh") });
 
-    } else if(i == 2){
-      axios.delete('/admin/order/' + item.ono, {}).then(()=>{emit("refresh")});
+    } else if (i == 2) {
+      axios.delete('/admin/order/' + item.ono, {}).then(() => { emit("refresh") });
     }
   }
 }
@@ -321,12 +349,10 @@ export default {
 
 
 <style scoped>
-
 .loading-progress {
   height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 </style>
