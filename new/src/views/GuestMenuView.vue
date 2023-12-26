@@ -1,12 +1,16 @@
 <template>
-  <div>
+  <div class="wrapper">
     <div>
-      <v-card variant="flat" >
+      <div class="loading-progress" v-if="isWaitingtoPay"> 
+        <v-progress-circular :size="74" :width="8" indeterminate></v-progress-circular>
+      </div>
+      <v-card variant="flat">
         <MenuListBody :isLoading="isLoading" :myData="myData" @add-to-cart="addMenutoCart"></MenuListBody>
         <MenuListFooter @go-to-pay="gotoPay" @delete-from-cart="deletefromCart" :myCart="myCart"></MenuListFooter>
       </v-card>
     </div>
   </div>
+
 </template>
 
 <script setup>
@@ -21,6 +25,7 @@ import { useRouter } from 'vue-router';
 let myData = ref([]);
 let isLoading = ref(true);
 let myCart = ref([]);
+let isWaitingtoPay = ref(false);
 
 function getData() {
   axios.get("/menu/list").then((d) => {
@@ -30,16 +35,17 @@ function getData() {
 }
 const router = useRouter();
 
-function gotoPay(){
+function gotoPay() {
+  isWaitingtoPay.value = true;
   let content = {};
   let totalPrice = 0;
   let cartState = myCart.value.map(i => {
-    let a  = i.get('menu').mname;
+    let a = i.get('menu').mname;
     let b = i.get('amount');
-    let c  = i.get('menu').price * b;
-    content[a] =  b.toString() +"개";
+    let c = i.get('menu').price * b;
+    content[a] = b.toString() + "개";
     totalPrice += c;
-    return [a,b,c];
+    return [a, b, c];
   });
 
 
@@ -51,25 +57,32 @@ function gotoPay(){
 
 
   axios.post('/order', data
-  
-  ).then((res)=>{
-    if(res.data.isSuccess){
-      router.push({path: '/result', name: 'result' , state: {
-          ono: res.data.ono,
-          myCart: cartState,
-        }});
+
+  ).then((res) => {
+    if (res.data.isSuccess) {
+      setTimeout(() => {
+        isWaitingtoPay.value = false;
+        router.push({
+          path: '/result', name: 'result', state: {
+            ono: res.data.ono,
+            myCart: cartState,
+          }
+        });
+      }, 1000
+      );
     } else {
       alert('오류: 주문 접수 실패');
+      isWaitingtoPay.value = false;
     }
 
-  } )
+  })
 }
 
 
-function addMenutoCart(i,amount){
+function addMenutoCart(i, amount) {
   let map = new Map();
-  map.set('menu',i);
-  map.set('amount',amount);
+  map.set('menu', i);
+  map.set('amount', amount);
   myCart.value.push(map);
 }
 
@@ -78,8 +91,8 @@ onMounted(() => {
 });
 
 
-function deletefromCart(i){
-  myCart.value.splice(i,1);
+function deletefromCart(i) {
+  myCart.value.splice(i, 1);
 }
 
 
@@ -98,6 +111,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.loading-progress {
+  position: absolute;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 768px;
+  /* top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
 
-
+}
 </style>
