@@ -2,21 +2,29 @@
     <div>
         <v-divider inset color="#6A1B9A" thickness="5px"></v-divider>
         <span>
-
-            <v-card class="total-price-wrapper ml-n3" variant="flat" width="200">
+            <v-card class="total-price-wrapper" variant="flat">
                 <v-card-title>총</v-card-title>
                 <v-card-title class="mt-n1">￦{{ totalPrice.toLocaleString() }}</v-card-title>
             </v-card>
             <div class="cart-text-wrapper" ref="myRef">
-                <div v-for="(menu_map, i) in myCart" :key="i">
-                    <div class="menu-text-wrapper">
-                        {{ menu_map.get('menu').mname }} &nbsp;&nbsp;{{ menu_map.get('amount') }} 개 &nbsp;&nbsp; ￦{{
-                            ((menu_map.get('amount') * menu_map.get('menu').price)).toLocaleString() }}
-                        <span class="del-btn-wrapper">
-                            <v-btn @click="() => deletefromCart(i)" class="ml-10" size="small" variant="tonal">취소</v-btn>
-                        </span>
-                    </div>
-                </div>
+                <v-table density="compact">
+                    <tbody>
+                        <tr v-for="(menu_map, i) in myCart" :key="i">
+                            <td class="cart-menu-name-wrapper">
+                                {{ menu_map.get('menu').mname }} &nbsp;&nbsp;{{ menu_map.get('amount') }} 개 &nbsp;&nbsp;
+                            </td>
+                            <td class="cart-menu-price-wrapper">
+                                ￦{{ ((menu_map.get('amount') * menu_map.get('menu').price)).toLocaleString() }}
+
+                            </td>
+                            <td class="del-btn-wrapper">
+                                <v-btn @click="() => deletefromCart(i)" size="small" variant="tonal">취소</v-btn>
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </v-table>
             </div>
 
             <v-btn class="pay-btn" variant="tonal" height="13vh" @click="gotoPay" :disabled="cartisempty"
@@ -60,9 +68,9 @@ watch(props.myCart, (newCart) => {
     }
     totalPrice.value = tmp;
     nextTick(() => {
-      if (myRef.value) {
-        myRef.value.scrollTo(0, myRef.value.scrollHeight);
-      }
+        if (myRef.value) {
+            myRef.value.scrollTo(0, myRef.value.scrollHeight);
+        }
     });
 })
 
@@ -77,7 +85,7 @@ function gotoPay() {
 
 const myRef = ref(null);
 
-onMounted(()=>{
+onMounted(() => {
 
 });
 
@@ -104,21 +112,16 @@ export default {
 }
 
 
-.cart-text-wrapper {
-    height: 15vh;
-    width: 60%;
-    overflow: auto;
-    margin-left: 8vw;
-}
 
 .total-price-wrapper {
     margin-top: 2vh;
-    margin-left: 3vh;
+    margin-left: 2vw;
     position: absolute;
     left: 0;
+    display: inline;
 }
 
-.menu-text-wrapper {
+/* .menu-text-wrapper {
     position: relative;
     margin-bottom: 5px;
 }
@@ -127,5 +130,30 @@ export default {
     position: absolute;
     right: 0;
     margin-right: 1vw;
+} */
+
+.cart-text-wrapper {
+    height: 15vh;
+    width: 60%;
+    overflow: auto;
+    margin-left: 10vw;
 }
+
+.menu-text-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.cart-menu-name-wrapper {
+    width: 70%;
+}
+
+.cart-menu-price-wrapper {
+    width: 20%;
+}
+
+
+.del-btn-wrapper {}
+
+
 </style>

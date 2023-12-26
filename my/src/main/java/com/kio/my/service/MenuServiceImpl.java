@@ -75,6 +75,7 @@ public class MenuServiceImpl implements MenuService {
                 String fileExtensionName = "";
                 File saveFile;
                 String imgurl = menu.getImgurl();
+                log.info(imgurl);
                 if ("image/png".equals(inputExtension)) {
                     fileExtensionName = ".png";
                 } else if ("image/jpeg".equals(inputExtension)) {
@@ -83,9 +84,11 @@ public class MenuServiceImpl implements MenuService {
                     fileExtensionName = ".gif";
                 }
                 if(fileExtensionName.length() > 1) {
+                    if(!"".equals(imgurl)){
                     File existFile = new File(uploadPath + imgurl);
                     if(existFile.exists()) {
                         existFile.delete();
+                    }
                     }
                     String newImgurl = UUID.randomUUID().toString() + fileExtensionName;
                     String newPath = uploadPath + newImgurl;
