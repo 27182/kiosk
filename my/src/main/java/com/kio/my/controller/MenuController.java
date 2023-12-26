@@ -4,6 +4,7 @@ package com.kio.my.controller;
 import com.kio.my.domain.Menu;
 import com.kio.my.dto.MenuDTO;
 import com.kio.my.service.MenuService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -17,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Controller
+@RestController
 @RequestMapping("/menu")
 @Log4j2
 @RequiredArgsConstructor
@@ -33,6 +34,7 @@ public class MenuController {
         return menuList;
     }
 
+    @ApiOperation("GET MENU LIST")
     @GetMapping("/list")
     @ResponseBody
     public List<Menu> getAvailableMenuList(Model model){

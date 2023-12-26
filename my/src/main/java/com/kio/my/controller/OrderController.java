@@ -33,8 +33,8 @@ public class OrderController {
 
     }
 
-    @PostMapping("/order")
-    public Map<Object,Object> updateOrder(@RequestBody OrderDTO orderDTO){
+
+    public Map<Object,Object> updateOrder(OrderDTO orderDTO){
 
         boolean isSuccess = true;
         long ono = 0;

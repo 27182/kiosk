@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
@@ -79,8 +80,8 @@ public class AdminController {
 
 
     @PostMapping("/order/update")
-    public void updateOrder(@RequestBody OrderDTO orderDTO){
-        orderController.updateOrder(orderDTO);
+    public Map<Object, Object> updateOrder(@RequestBody OrderDTO orderDTO){
+        return orderController.updateOrder(orderDTO);
 
     }
     @DeleteMapping("/order/{ono}")
