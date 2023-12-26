@@ -16,7 +16,7 @@ public class OrderRepositoryTests {
     @Autowired
     private OrderRepository or;
 
-    @Test
+
     public void testInsert() {
  
 

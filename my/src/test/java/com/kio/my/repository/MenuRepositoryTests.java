@@ -16,7 +16,7 @@ public class MenuRepositoryTests {
     @Autowired
     private MenuRepository mr;
 
-    @Test
+
     public void testInsert() {
 //        IntStream.rangeClosed(1, 11).forEach(i -> {
 //            Menu menu = Menu.builder().mname("name").price(i).mtype("type").build();

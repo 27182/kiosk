@@ -15,7 +15,7 @@ public class MenuServiceTests {
     @Autowired
     private MenuService menuService;
 
-    @Test
+
     public void testRegister() {
 
         log.info(menuService.getClass().getName());

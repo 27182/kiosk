@@ -25,7 +25,8 @@
             </template>
           </v-data-table>
           <span>
-            <v-data-table v-show="n == 1" :items="myMenuData" :headers="menuHeaders" :search="search">
+            <v-data-table v-show="n == 1" :items="myMenuData" :headers="menuHeaders" :search="search"
+            :sort-by="[{ key: 'mno', order: 'desc' }]">
               <template v-slot:[`item.actions`]="{ item }">
                 <v-icon size="small" class="me-2" @click="showDialog1(item)">
                   mdi-pencil
@@ -73,6 +74,9 @@
                   <v-select :rules="rules" v-model="cur_item.recommanded" :items="['O', 'X']" label="추천"
                     required></v-select>
                 </v-col>
+              </v-row>
+              <v-row>
+                <v-file-input id="img-edit" label="메뉴 사진" accept="image/jpg, image/jpeg, image/png, image/gif"></v-file-input>
               </v-row>
             </v-container>
           </v-card-text>
@@ -258,15 +262,31 @@ function updateMenu() {
 
   ) {
     alert("FAIL!");
-    console.log(new_item);
   } else {
-    axios.post('/admin/menu/update', {
+    let menuDTO = {
       'mno': cur_item.value.mno,
       'mname': cur_item.value.mname,
       'mtype': cur_item.value.mtype,
       'price': cur_item.value.price,
       'available': (cur_item.value.available === "가능" ? "1" : "0"),
       'recommanded': (cur_item.value.recommanded === "O" ? "1" : "0"),
+      'imgurl': cur_item.value.imgurl,
+    }
+
+    const formData = new FormData();
+    const json = JSON.stringify(menuDTO);
+    const blob = new Blob([json], {type: "application/json"});
+    formData.append("menuDTO", blob);
+
+    if(document.getElementById("img-edit").files[0] !== null){
+      formData.append("file", document.getElementById("img-edit").files[0]);
+    }
+
+    axios.post('/admin/menu/update', formData, {
+      headers: {
+        "Content-Type": `multipart/form-data`,
+      },
+
     }).then(() => { emit("refresh") });
     closePopUp();
   }

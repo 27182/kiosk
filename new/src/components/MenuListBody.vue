@@ -20,7 +20,7 @@
                   <v-card class="menu-card" hover @click="() => MenuClicked(i)">
                     <v-responsive aspect-ratio="1">
                       <v-img aspect-ratio="1" 
-                        :src="getImageSource(i.mno)">
+                        :src="getImageSource(i.imgurl)">
                       </v-img>
                       
                       <v-card-title class="mt-n12" style="width: 100%;">
@@ -50,7 +50,7 @@
                   <v-card class="menu-card" hover @click="() => MenuClicked(i)">
                     <v-responsive aspect-ratio="1">
                       <v-img aspect-ratio="1" 
-                        :src="getImageSource(i.mno)">
+                        :src="getImageSource(i.imgurl)">
                       </v-img>
                       
                       <v-card-title class="mt-n12" style="width: 100%;">
@@ -130,7 +130,7 @@ let currentMenu = ref(null);
 
 
 function getImageSource(i){
-    return "assets/menu_img/" + i.toString() + ".png";
+    return "assets/menu_img/" + i;
 }
 
 

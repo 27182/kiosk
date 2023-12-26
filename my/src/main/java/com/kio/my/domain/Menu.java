@@ -46,7 +46,7 @@ public class Menu extends BaseEntity {
     private String imgurl;
 
     public void changeOneMenuInfo(String mname, String mtype, int price, String available
-            , String recommanded, Long stock, String etc, String imgurl){
+            , String recommanded, Long stock, String etc){
 
         this.mname = mname;
         this.mtype = mtype;
@@ -55,6 +55,9 @@ public class Menu extends BaseEntity {
         this.recommanded = recommanded;
         this.stock = stock;
         this.etc = etc;
+    }
+
+    public  void changeImgUrl(String imgurl){
         this.imgurl = imgurl;
     }
 

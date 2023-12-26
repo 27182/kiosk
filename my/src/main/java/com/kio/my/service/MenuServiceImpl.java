@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -64,26 +65,42 @@ public class MenuServiceImpl implements MenuService {
         Optional<Menu> result = menuRepository.findById(menuDTO.getMno());
             menu = result.get();
             menu.changeOneMenuInfo(menuDTO.getMname(),menuDTO.getMtype(),menuDTO.getPrice()
-            ,menuDTO.getAvailable(),menuDTO.getRecommanded(),menuDTO.getStock(),menuDTO.getEtc(),menuDTO.getImgurl());
+            ,menuDTO.getAvailable(),menuDTO.getRecommanded(),menuDTO.getStock(),menuDTO.getEtc());
 
         }
-        Menu result = menuRepository.save(menu);
 
         // 파일 처리
-            if(file != null){
-                File saveFile = new File(uploadPath, result.getMno().toString());
-                try{
+            if(file != null) {
+                String inputExtension = file.getContentType();
+                String fileExtensionName = "";
+                File saveFile;
+                String imgurl = menu.getImgurl();
+                if ("image/png".equals(inputExtension)) {
+                    fileExtensionName = ".png";
+                } else if ("image/jpeg".equals(inputExtension)) {
+                    fileExtensionName = ".jpg";
+                } else if ("image/gif".equals(inputExtension)) {
+                    fileExtensionName = ".gif";
+                }
+                if(fileExtensionName.length() > 1) {
+                    File existFile = new File(uploadPath + imgurl);
+                    if(existFile.exists()) {
+                        existFile.delete();
+                    }
+                    String newImgurl = UUID.randomUUID().toString() + fileExtensionName;
+                    String newPath = uploadPath + newImgurl;
+                    saveFile = new File(newPath);
+                try {
                     file.transferTo(saveFile);
-                }  catch(Exception e ){
+                    menu.changeImgUrl(newImgurl);
+                } catch (Exception e) {
                     log.info(e);
+                }
                 }
             }
 
-
-
         // 여기까지
-
-
+        Menu result = menuRepository.save(menu);
     }
 
     @Override
