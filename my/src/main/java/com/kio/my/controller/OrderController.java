@@ -34,7 +34,7 @@ public class OrderController {
     }
 
 
-    @PostMapping("/order")
+    @PostMapping("api/order")
     public Map<Object,Object> updateOrder(@RequestBody OrderDTO orderDTO){
 
         boolean isSuccess = true;

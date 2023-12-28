@@ -11,12 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
-@WebFilter("/admin/*")
+@WebFilter("/api/admin/*")
 public class AdminFilter implements Filter {
 
 
-    @Autowired
-    JWTUtil jwtUtil;
+
+    private final JWTUtil jwtUtil;
+
+    AdminFilter(JWTUtil jwtUtil){
+        this.jwtUtil = jwtUtil;
+    }
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;

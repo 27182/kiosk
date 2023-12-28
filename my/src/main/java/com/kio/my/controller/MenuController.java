@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/menu")
+@RequestMapping("api/menu")
 @Log4j2
 @RequiredArgsConstructor
 public class MenuController {

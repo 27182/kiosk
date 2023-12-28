@@ -31,7 +31,7 @@ public class ApiLoginController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @PostMapping("/login")
+    @PostMapping("api/login")
     public Map<String,Object> login(@RequestBody ApiAdminDTO apiAdminDTO, HttpServletRequest req, HttpServletResponse res) {
 
         Map<String, Object> result = new HashMap<>();
@@ -59,7 +59,7 @@ public class ApiLoginController {
     }
 
 
-    @PostMapping("/logout")
+    @PostMapping("api/logout")
     public  void logout(HttpServletResponse res){
         res.setHeader("Set-Cookie", "accessToken=null ; HttpOnly; SameSite=strict; max-age=0; path=/api/admin");
         Cookie cookie = new Cookie("Login","false");
@@ -69,7 +69,7 @@ public class ApiLoginController {
     }
 
 
-    @GetMapping("/login/pass")
+    @GetMapping("api/login/pass")
     public Map<String, Object> passLogin(HttpServletResponse res){
         Map<String, Object> result = new HashMap<>();
         try {
