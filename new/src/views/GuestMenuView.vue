@@ -28,7 +28,7 @@ let myCart = ref([]);
 let isWaitingtoPay = ref(false);
 
 function getData() {
-  axios.get("/menu/list").then((d) => {
+  axios.get("/api/menu/list").then((d) => {
     myData.value = d.data;
     isLoading.value = false;
   })
@@ -56,7 +56,7 @@ function gotoPay() {
 
 
 
-  axios.post('/order', data
+  axios.post('/api/order', data
 
   ).then((res) => {
     if (res.data.isSuccess) {

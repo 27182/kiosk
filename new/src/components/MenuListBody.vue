@@ -130,7 +130,7 @@ let currentMenu = ref(null);
 
 
 function getImageSource(i){
-    return "assets/menu_img/" + i;
+    return "api/assets/menu_img/" + i;
 }
 
 

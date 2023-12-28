@@ -17,7 +17,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 function deleteToken(){
-    axios.post('/logout').then((a)=>{
+    axios.post('/api/logout').then((a)=>{
         router.replace('/');
     })
 }

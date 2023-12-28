@@ -3,15 +3,15 @@
         <div class="border-wrapper">
             <v-icon size="256" icon="mdi-account" color="blue"></v-icon>
             <v-form @submit.prevent="login">
-                <v-text-field v-model="id" class="input" label="Admin ID= admin" bg-color="white"></v-text-field>
-                <v-text-field v-model="pw" class="input" label="Admin Password= 0000" bg-color="white"
+                <v-text-field v-model="id" class="input" label="Admin ID: admin" bg-color="white"></v-text-field>
+                <v-text-field v-model="pw" class="input" label="Admin Password: 0000" bg-color="white"
                 type="password"></v-text-field>
                 <v-btn :loading="loading" size="x-large" type="submit" block class="mt-2" color="primary">Get JSON Web Token</v-btn>
             </v-form>
             <div v-show="errorMsg" class="mt-4" style="color: red;">로그인 실패 {{ "(" + i + ")" }}</div>
         </div>
         <v-btn class="mt-5" color="red" @click="passLogin">
-            로그인 패스하기
+            로그인 백도어
         </v-btn>
     </div>
 </template>
@@ -42,7 +42,7 @@ async function login() {
         id: id.value,
         pw: pw.value
     }
-    const data = await axios.post('/login', formData, { "Content-Type": 'application/json' });
+    const data = await axios.post('/api/login', formData, { "Content-Type": 'application/json' });
     if (!data.data.isSuccess) {
         i.value++;
         errorMsg.value = true;
@@ -53,7 +53,9 @@ async function login() {
 }
 
 function passLogin(){
-    
+    axios.get('/api/login/pass').then((a)=>{
+        router.replace('/admin');
+    })
 }
 
 

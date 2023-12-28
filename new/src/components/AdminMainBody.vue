@@ -282,7 +282,7 @@ function updateMenu() {
       formData.append("file", document.getElementById("img-edit").files[0]);
     }
 
-    axios.post('/admin/menu/update', formData, {
+    axios.post('/api/admin/menu/update', formData, {
       headers: {
         "Content-Type": `multipart/form-data`,
       },
@@ -334,7 +334,7 @@ function insertMenu() {
       formData.append("file", document.getElementById("img").files[0]);
     }
 
-    axios.post('/admin/menu/update', formData, {
+    axios.post('/api/admin/menu/update', formData, {
       headers: {
         "Content-Type": `multipart/form-data`,
       },
@@ -350,10 +350,10 @@ function insertMenu() {
 function confirmDelete(item, i) {
   if (confirm('정말 삭제하시겠습니까?')) {
     if (i == 1) {
-      axios.delete('/admin/menu/' + item.mno, {}).then(() => { emit("refresh") });
+      axios.delete('/api/admin/menu/' + item.mno, {}).then(() => { emit("refresh") });
 
     } else if (i == 2) {
-      axios.delete('/admin/order/' + item.ono, {}).then(() => { emit("refresh") });
+      axios.delete('/api/admin/order/' + item.ono, {}).then(() => { emit("refresh") });
     }
   }
 }

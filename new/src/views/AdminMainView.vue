@@ -26,7 +26,7 @@ const router = useRouter();
 
 
 function getOrderData() {
-  axios.get("/admin/order/list").then((d) => {
+  axios.get("/api/admin/order/list").then((d) => {
     myOrderData.value = d.data;
     myOrderData.value.forEach((a) => { a.regDate = formatDate(a.regDate); });
     loadingStack.value++;
@@ -42,7 +42,7 @@ function formatDate(value) {
 }
 
 function getMenuData() {
-  axios.get("/admin/menu/list").then((d) => {
+  axios.get("/api/admin/menu/list").then((d) => {
     myMenuData.value = d.data;
     myMenuData.value.forEach((a) => {
       a.regDate = formatDate(a.regDate);

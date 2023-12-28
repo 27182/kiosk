@@ -63,4 +63,11 @@ public class ApiLoginService {
 
 
     }
+
+
+    public String passLogin() throws Exception {
+        Map<String,Object> val = new HashMap<>();
+        val.put(id,passwordEncoder.encode(pw));
+        return jwtUtil.generateToken(val,60);
+    }
 }
