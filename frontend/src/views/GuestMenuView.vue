@@ -5,7 +5,7 @@
         <v-progress-circular :size="74" :width="8" indeterminate></v-progress-circular>
       </div>
       <v-card variant="flat">
-        <MenuListBody :base64_image="base64_image" :isLoading="isLoading" :myData="myData" @add-to-cart="addMenutoCart"></MenuListBody>
+        <MenuListBody :imgsrc="imgsrc" :isLoading="isLoading" :myData="myData" @add-to-cart="addMenutoCart"></MenuListBody>
         <MenuListFooter @go-to-pay="gotoPay" @delete-from-cart="deletefromCart" :myCart="myCart"></MenuListFooter>
       </v-card>
     </div>
@@ -26,7 +26,7 @@ let isLoading = ref(true);
 let myCart = ref([]);
 let isWaitingtoPay = ref(false);
 
-let base64_image = ref({});
+let imgsrc = ref({});
 async function getData() {
   await axios.get("/api/menu/list").then((d) => {
     myData.value = d.data;
@@ -85,22 +85,18 @@ function addMenutoCart(i, amount) {
   myCart.value.push(map);
 }
 
-onMounted(() => {
-  getData().then(async ()=>{
+onMounted(async () => {
+  await getData().then(async ()=>{
     for(let item of myData.value) {
-      await axios.get("/api/menu_img/" + item.imgurl).then((a) => {
-        console.log(a);
-        if (a.status !== 404){
-          let url = URL.createObjectURL(a.data.blob());
-          base64_image.value[item.mno] = url;
-          console.log(url);
-        }
-      }).catch(() => { });
+      await axios.get("/api/menu_img/" + item.imgurl , {responseType: 'blob'}).then((a) => {
+          let url = URL.createObjectURL(a.data);
+          imgsrc.value[item.mno] = url;
+      });
     }
   }
-  ).then(()=>{
-    isLoading.value = false;
-  })
+  )
+  isLoading.value = false;
+  
   
 });
 

@@ -43,7 +43,7 @@ public class HomeController {
 
     @GetMapping("/api/menu_img/{imagename}")
     @ResponseBody
-    public ResponseEntity<byte[]> getImageDynamicType(@PathVariable String imagename) throws IOException {
+    public ResponseEntity<byte[]> getImageDynamicType(@PathVariable("imagename") String imagename) throws IOException {
 
         int index = imagename.lastIndexOf(".");
         String extension = "";

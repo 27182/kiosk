@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MyApplication<my>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.kio.my.MyApplication",
+            "projectName": "my",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

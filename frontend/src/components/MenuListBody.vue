@@ -20,7 +20,7 @@
                   <v-card class="menu-card" hover @click="() => MenuClicked(i)">
                     <v-responsive aspect-ratio="1">
                       <v-img aspect-ratio="1"
-                        :src="base64_image[i.mno.toString()].data">
+                        :src="imgsrc[i.mno]">
                       </v-img>
                       
                       <v-card-title class="mt-n12" style="width: 100%;">
@@ -50,7 +50,7 @@
                   <v-card class="menu-card" hover @click="() => MenuClicked(i)">
                     <v-responsive aspect-ratio="1">
                       <v-img aspect-ratio="1" 
-                      :src="'data:image/png;base64,'+ base64_image[i.mno.toString()].data">
+                      :src="imgsrc[i.mno]">
                       </v-img>
                       
                       <v-card-title class="mt-n12" style="width: 100%;">
@@ -116,10 +116,10 @@ let currentTab = ref(null);
 // const isLoading = defineProps(['isLoading']);
 
 
-const props = defineProps(['myData', 'isLoading', 'base64_image']);
+const props = defineProps(['myData', 'isLoading', 'imgsrc']);
 
 
-computed(() => { return ( props.base64_image ,props.isLoading) });
+computed(() => { return ( props.imgsrc ,props.isLoading) });
 
 
 
