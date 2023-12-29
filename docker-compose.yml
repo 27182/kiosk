@@ -1,0 +1,28 @@
+version: "3.2"
+services:
+  database:
+    container_name: database
+    image: mariadb
+    volumes:
+      - ~/docker/mariadb/etc/mysql/conf.d:/etc/mysql/conf.d:ro
+      - ~/docker/mariadb/var/lib/mysql:/var/lib/mysql
+      - ~/docker/mariadb/var/log/maria:/var/log/maria
+    environment:
+      - MYSQL_DATABASE=database_name
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_ROOT_HOST=%
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    ports:
+      - 3309:3309
+
+  application:
+    image: myorg/myapp:latest
+    build: .
+    volumes:
+      - /c/menu_img:/menu_img
+    environment:
+      spring.datasource.url: "jdbc:mariadb://database:3306/kio?createDatabaseIfNotExist=true"
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+    ports:
+      - 8080:8080
