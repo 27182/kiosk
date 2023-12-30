@@ -58,6 +58,7 @@ public class HomeController {
 //        InputStream in =
 //                getClass().getResourceAsStream(path + imagename);
         try {
+            log.info(path+imagename);
         File file = new File(path + imagename);
   //      InputStream in = new FileInputStream(file);
 
