@@ -89,8 +89,16 @@ export default {
 
 <style scoped>
 .admin-main-wrapper {
-  width: 40vw;
+  width: 768px;
   background-color: white;
   height: 100vh;
 }
+
+@media screen and (max-width: 767px) {
+  .admin-main-wrapper {
+    width: 100vw;
+  }
+}
+
+
 </style>

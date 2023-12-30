@@ -91,7 +91,7 @@ function printCart() {
 
 <style>
 .result-card {
-    width: 40vw;
+    width: 768px;
 }
 
 .result-wrapper {
@@ -104,7 +104,17 @@ function printCart() {
 
 .all-wrapper {
     height: 100vh;
-    width: 40vw;
+    width: 768px;
     background-color: white;
+}
+
+@media screen and (max-width: 767px) {
+  .all-wrapper {
+    width: 100vw;
+  }
+
+  .result-card {
+    width: 100vw;
+}
 }
 </style>

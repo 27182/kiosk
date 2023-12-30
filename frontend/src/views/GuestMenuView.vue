@@ -137,6 +137,16 @@ export default {
 }
 
 .wrapper {
-  width: 40vw;
+  width: 768px;
+}
+
+@media screen and (max-width: 767px) {
+  .wrapper {
+    width: 100vw;
+  }
+
+  .loading-progress {
+    width: 100vw;
+}
 }
 </style>

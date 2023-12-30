@@ -85,6 +85,12 @@ export default {
     text-align: center;
 }
 
+@media screen and (max-width: 767px) {
+  .wrapper {
+    width: 100vw;
+  }
+}
+
 /* .border-wrapper {
     display: inline-block;
     border: 3px solid rgb(64, 162, 219);
