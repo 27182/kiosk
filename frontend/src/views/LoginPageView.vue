@@ -81,7 +81,7 @@ export default {
 }
 
 .input {
-    width: 30vw;
+    width: 100%;
     text-align: center;
 }
 

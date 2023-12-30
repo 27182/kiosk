@@ -104,6 +104,7 @@ function printCart() {
 
 .all-wrapper {
     height: 100vh;
+    width: 768px;
     background-color: white;
 }
 </style>

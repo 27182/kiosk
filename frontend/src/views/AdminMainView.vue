@@ -89,7 +89,7 @@ export default {
 
 <style scoped>
 .admin-main-wrapper {
-  width: 100%;
+  width: 768px;
   background-color: white;
   height: 100vh;
 }

@@ -1,5 +1,5 @@
 <template>
-  <RouterView/>
+    <RouterView/>
 </template>
 
 <script>
@@ -25,8 +25,11 @@ body {
   margin: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  width: 768px;
   background-color: #DDC9BC;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 body::-webkit-scrollbar {
