@@ -137,6 +137,6 @@ export default {
 }
 
 .wrapper {
-  width: 768px;
+  width: 40vw;
 }
 </style>
