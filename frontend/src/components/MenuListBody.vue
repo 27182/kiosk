@@ -17,13 +17,13 @@
             <v-container fluid>
               <v-row>
                 <v-col v-for="i in myData" :key="i" cols="4" v-show="i.recommanded === '1'">
-                  <v-card class="menu-card" hover @click="() => MenuClicked(i)">
+                  <v-card class="menu-card" hover @click="() => MenuClicked(i)" style="text-align: center;">
                     <v-responsive aspect-ratio="1">
-                      <v-img aspect-ratio="1" style="margin-bottom: 0;"
+                        <v-img aspect-ratio="12 / 7" style="margin-bottom: 0;"
                         :src="imgsrc[i.mno]">
                       </v-img>
                       
-                      <div style="margin-top: 0;">
+                      <div style="position: absolute; bottom: 0; width: 100%;">
                         <div style="font-size: 1.25rem; font-weight: 500;">
                           {{ i.mname }}
                         </div>
@@ -32,7 +32,8 @@
                           ￦{{ i.price.toLocaleString() }}
                         </div>
                       </div>
-          
+
+                      
                       
                     </v-responsive>
                   </v-card>
@@ -48,13 +49,14 @@
             <v-container fluid>
               <v-row>
                 <v-col v-for="i in myData" :key="i" cols="4" v-show="(i.mtype === 'main' && n === 2) || (i.mtype === 'side' && n === 3) || (i.mtype === 'drink' && n === 4)">
-                  <v-card class="menu-card" hover @click="() => MenuClicked(i)">
+                  <v-card class="menu-card" hover @click="() => MenuClicked(i)" style="text-align: center;">
                     <v-responsive aspect-ratio="1">
-                      <v-img aspect-ratio="1" 
-                      :src="imgsrc[i.mno]">
+   
+                        <v-img aspect-ratio="12 / 7" 
+                        :src="imgsrc[i.mno]">
                       </v-img>
                       
-                      <div>
+                      <div style="position: absolute; bottom: 0; width: 100%;">
                         <div style="font-size: 1.25rem; font-weight: 500;">
                           {{ i.mname }}
                         </div>
@@ -63,6 +65,7 @@
                           ￦{{ i.price.toLocaleString() }}
                         </div>
                       </div>
+  
                       
                     </v-responsive>
                   </v-card>
