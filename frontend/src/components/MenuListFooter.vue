@@ -32,7 +32,7 @@
                         style="margin-top: 5vh;"></v-btn>
                     </template>
                     <v-card>
-                        <v-table density="compact" v-show="!isSmallScreen.matches">
+                        <v-table density="compact">
                             <thead>
                                 <th>
                                     제품
@@ -125,7 +125,7 @@ function gotoPay() {
 const myRef = ref(null);
 
 onMounted(() => {
-    screenSize.matches? isSmallScreen.value = true : isSmallScreen = false;
+    screenSize.matches? isSmallScreen.value = true : isSmallScreen.value = false;
 });
 
 
@@ -135,9 +135,19 @@ let screenSize = window.matchMedia("(max-width: 650px)");
 
 screenSize.addEventListener('change',()=>{
     if(screenSize.matches){
-        isSmallScreen.value = true;
+        try{
+            isSmallScreen.value = true;
+
+        } catch(e){
+            document
+        }
     } else {
-        isSmallScreen.value = false;
+        try{
+            isSmallScreen.value = false;
+
+        } catch(e){
+            document
+        }
     }
 })
 

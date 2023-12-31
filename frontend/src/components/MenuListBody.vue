@@ -19,11 +19,11 @@
                 <v-col v-for="i in myData" :key="i" cols="4" v-show="i.recommanded === '1'">
                   <v-card class="menu-card" hover @click="() => MenuClicked(i)">
                     <v-responsive aspect-ratio="1">
-                      <v-img aspect-ratio="1"
+                      <v-img aspect-ratio="1" style="margin-bottom: 0;"
                         :src="imgsrc[i.mno]">
                       </v-img>
                       
-                      <div>
+                      <div style="margin-top: 0;">
                         <div style="font-size: 1.25rem; font-weight: 500;">
                           {{ i.mname }}
                         </div>
