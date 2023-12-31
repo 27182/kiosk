@@ -20,6 +20,10 @@ export default {
   text-align: center;
 }
 
+html {
+  overflow-x: auto !important;
+}
+
 
 body {
   margin: auto;

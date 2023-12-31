@@ -23,15 +23,16 @@
                         :src="imgsrc[i.mno]">
                       </v-img>
                       
-                      <v-card-title class="mt-n12" style="width: 100%;">
-                        {{ i.mname }}
-                      </v-card-title>
                       <div>
-                        &nbsp;
+                        <div style="font-size: 1.25rem; font-weight: 500;">
+                          {{ i.mname }}
+                        </div>
+                        
+                        <div style="font-size: 1.25rem; font-weight: 500;">
+                          ￦{{ i.price.toLocaleString() }}
+                        </div>
                       </div>
-                      <v-card-title class="mt-n12">
-                        ￦{{ i.price.toLocaleString() }}
-                      </v-card-title>
+          
                       
                     </v-responsive>
                   </v-card>
@@ -53,15 +54,15 @@
                       :src="imgsrc[i.mno]">
                       </v-img>
                       
-                      <v-card-title class="mt-n12" style="width: 100%;">
-                        {{ i.mname }}
-                      </v-card-title>
                       <div>
-                        &nbsp;
+                        <div style="font-size: 1.25rem; font-weight: 500;">
+                          {{ i.mname }}
+                        </div>
+                        
+                        <div style="font-size: 1.25rem; font-weight: 500;">
+                          ￦{{ i.price.toLocaleString() }}
+                        </div>
                       </div>
-                      <v-card-title class="mt-n12">
-                        ￦{{ i.price.toLocaleString() }}
-                      </v-card-title>
                       
                     </v-responsive>
                   </v-card>
@@ -102,7 +103,7 @@
 
 
 <script setup>
-import { ref, computed} from 'vue';
+import { ref, computed, watch} from 'vue';
 import { defineProps, defineEmits, defineExpose } from 'vue';
 import axios from "axios";
 
@@ -177,6 +178,13 @@ function decr() {
 
 defineExpose({
   MenuClicked
+})
+
+
+watch(isActive,()=>{
+  if(isActive.value==false){
+    setTimeout(()=>{amount.value = 1;},200)
+  }
 })
 
 </script>

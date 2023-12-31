@@ -88,10 +88,12 @@ function addMenutoCart(i, amount) {
 onMounted(async () => {
   await getData().then(async ()=>{
     for(let item of myData.value) {
-      await axios.get("/api/menu_img/" + item.imgurl , {responseType: 'blob'}).then((a) => {
+      if(item.imgurl.length >= 1){
+        await axios.get("/api/menu_img/" + item.imgurl , {responseType: 'blob'}).then((a) => {
           let url = URL.createObjectURL(a.data);
           imgsrc.value[item.mno] = url;
-      });
+        });
+      }
     }
   }
   )
