@@ -6,12 +6,12 @@
                 <v-text-field v-model="id" class="input" label="Admin ID: admin" bg-color="white"></v-text-field>
                 <v-text-field v-model="pw" class="input" label="Admin Password: 0000" bg-color="white"
                 type="password"></v-text-field>
-                <v-btn :loading="loading" size="x-large" type="submit" block class="mt-2" color="primary">Get JSON Web Token</v-btn>
+                <v-btn :loading="loading" size="x-large" type="submit" block class="mt-2" color="primary">로그인</v-btn>
             </v-form>
             <div v-show="errorMsg" class="mt-4" style="color: red;">로그인 실패 {{ "(" + i + ")" }}</div>
         </div>
         <v-btn class="mt-5" color="red" @click="passLogin">
-            로그인 백도어
+            로그인 패스하기
         </v-btn>
     </div>
 </template>
