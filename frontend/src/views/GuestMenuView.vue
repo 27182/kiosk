@@ -5,7 +5,8 @@
         <v-progress-circular :size="74" :width="8" indeterminate></v-progress-circular>
       </div>
       <v-card variant="flat">
-        <MenuListBody :imgsrc="imgsrc" :isLoading="isLoading" :myData="myData" @add-to-cart="addMenutoCart"></MenuListBody>
+        <MenuListBody :imgsrc="imgsrc" :isLoading="isLoading" :myData="myData" @add-to-cart="addMenutoCart">
+        </MenuListBody>
         <MenuListFooter @go-to-pay="gotoPay" @delete-from-cart="deletefromCart" :myCart="myCart"></MenuListFooter>
       </v-card>
     </div>
@@ -18,13 +19,17 @@ import axios from 'axios';
 import { ref } from "vue";
 import MenuListBody from '@/components/MenuListBody.vue'
 import MenuListFooter from '@/components/MenuListFooter.vue'
-import { useRouter } from 'vue-router';
+// import vueConfig from 'vue.config';
+// import { useRouter } from 'vue-router';
 
 
 let myData = ref([]);
 let isLoading = ref(true);
 let myCart = ref([]);
 let isWaitingtoPay = ref(false);
+// let tid = "";
+
+
 
 let imgsrc = ref({});
 async function getData() {
@@ -32,9 +37,9 @@ async function getData() {
     myData.value = d.data;
   })
 }
-const router = useRouter();
+// const router = useRouter();
 
-function gotoPay() {
+async function gotoPay() {
   isWaitingtoPay.value = true;
   let content = {};
   let totalPrice = 0;
@@ -55,26 +60,35 @@ function gotoPay() {
 
 
 
-  axios.post('/api/order', data
 
-  ).then((res) => {
-    if (res.data.isSuccess) {
-      setTimeout(() => {
-        isWaitingtoPay.value = false;
-        router.push({
-          path: '/result', name: 'result', state: {
-            ono: res.data.ono,
-            myCart: cartState,
-          }
-        });
-      }, 1000
-      );
-    } else {
-      alert('오류: 주문 접수 실패');
-      isWaitingtoPay.value = false;
+  await axios.post('/api/kakaopay/ready', data).then((res) => {
+    if (res.status === 200) {
+      window.location.href = res.data.next_redirect_pc_url;
     }
+  });
 
-  })
+
+
+  // axios.post('/api/order', data
+  //
+  // ).then((res) => {
+  //   if (res.data.isSuccess) {
+  //     setTimeout(() => {
+  //       isWaitingtoPay.value = false;
+  //       router.push({
+  //         path: '/result', name: 'result', state: {
+  //           ono: res.data.ono,
+  //           myCart: cartState,
+  //         }
+  //       });
+  //     }, 1000
+  //     );
+  //   } else {
+  //     alert('오류: 주문 접수 실패');
+  //     isWaitingtoPay.value = false;
+  //   }
+  //
+  // })
 }
 
 
@@ -86,10 +100,10 @@ function addMenutoCart(i, amount) {
 }
 
 onMounted(async () => {
-  await getData().then(async ()=>{
-    for(let item of myData.value) {
-      if(item.imgurl.length >= 1){
-        await axios.get("/api/menu_img/" + item.imgurl , {responseType: 'blob'}).then((a) => {
+  await getData().then(async () => {
+    for (let item of myData.value) {
+      if (item.imgurl.length >= 1) {
+        await axios.get("/api/menu_img/" + item.imgurl, { responseType: 'blob' }).then((a) => {
           let url = URL.createObjectURL(a.data);
           imgsrc.value[item.mno] = url;
         });
@@ -98,8 +112,8 @@ onMounted(async () => {
   }
   )
   isLoading.value = false;
-  
-  
+
+
 });
 
 
@@ -138,6 +152,11 @@ export default {
 
 }
 
+.pay-modal {
+  width: 50vh;
+  height: 30vh;
+}
+
 .wrapper {
   width: 768px;
 }
@@ -149,6 +168,6 @@ export default {
 
   .loading-progress {
     width: 100vw;
-}
+  }
 }
 </style>

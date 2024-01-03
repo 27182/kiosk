@@ -19,13 +19,14 @@
                 </v-btn>
             </RouterLink>
         </div>
-        </div>
+    </div>
 </template>
 
 
 <script setup>
 
-import { onMounted,ref } from 'vue';
+import { onMounted, ref } from 'vue';
+
 
 let isLogin = ref(false);
 
@@ -55,6 +56,4 @@ export default {
     justify-content: center;
     align-items: center;
 }
-
-
 </style>
