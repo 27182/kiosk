@@ -11,6 +11,9 @@
       </v-card>
     </div>
   </div>
+  <div>
+    <iframe :src="link" style="width: 500px; height: 500px;"></iframe>
+  </div>
 </template>
 
 <script setup>
@@ -19,8 +22,9 @@ import axios from 'axios';
 import { ref } from "vue";
 import MenuListBody from '@/components/MenuListBody.vue'
 import MenuListFooter from '@/components/MenuListFooter.vue'
+import { watch } from 'vue';
 // import vueConfig from 'vue.config';
-// import { useRouter } from 'vue-router';
+//import { useRouter } from 'vue-router';
 
 
 let myData = ref([]);
@@ -29,7 +33,7 @@ let myCart = ref([]);
 let isWaitingtoPay = ref(false);
 // let tid = "";
 
-
+let link = ref("");
 
 let imgsrc = ref({});
 async function getData() {
@@ -37,7 +41,7 @@ async function getData() {
     myData.value = d.data;
   })
 }
-// const router = useRouter();
+//const router = useRouter();
 
 async function gotoPay() {
   isWaitingtoPay.value = true;
@@ -63,12 +67,25 @@ async function gotoPay() {
 
   await axios.post('/api/kakaopay/ready', data).then((res) => {
     if (res.status === 200) {
-      window.location.href = res.data.next_redirect_pc_url;
+
+      isWaitingtoPay.value = false;
+      link.value = res.data.next_redirect_pc_url;
+      document.getElementsByTagName('iframe')[0].contentWindow.location.href 
+      // router.push({
+      //   path: '/pay', name: 'pay', state: {
+      //     kakaoLink: res.data.next_redirect_pc_url,
+      //     myCart: cartState,
+      //   }
+      // });
     }
   });
 
 
-
+  watch(link,()=>{
+    if(link.value.indexOf('pg_token') != -1){
+      alert("띠용");
+    }
+  })
   // axios.post('/api/order', data
   //
   // ).then((res) => {

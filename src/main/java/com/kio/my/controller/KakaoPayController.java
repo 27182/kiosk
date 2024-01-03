@@ -36,7 +36,7 @@ public class KakaoPayController {
 
 
     @GetMapping("/approve/{ono}")
-    public Ordered ApprovePayment(@RequestParam String pg_token, @PathVariable String ono, HttpServletResponse res) throws IOException {
+    public Ordered ApprovePayment(@RequestParam(name = "pg_token") String pg_token, @PathVariable(name = "ono") String ono, HttpServletResponse res) throws IOException {
 
 
         log.info(pg_token);
@@ -45,10 +45,11 @@ public class KakaoPayController {
 
          Ordered ordered = kakaoPayServiceImpl.approvePayment(pg_token,ono);
          res.addCookie(new Cookie("ono", ordered.getOno().toString()));
-         res.sendRedirect(present_url + "/result");
+         
          return ordered;
         } catch (Exception e){
-            res.sendRedirect(present_url);
+            
+            return null;
         }
     }
 

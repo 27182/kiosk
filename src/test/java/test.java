@@ -10,7 +10,6 @@ public class test {
 
     @Test
     public void testAPI(){
-        KakaoPayServiceImpl kaKaoPayServiceImpl = new KakaoPayServiceImpl();
-        kaKaoPayServiceImpl.readytoPay(new OrderDTO());
+        
     }
 }

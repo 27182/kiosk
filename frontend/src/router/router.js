@@ -4,6 +4,7 @@ import MainView from '@/views/MainView.vue'
 import AdminMainView from '@/views/AdminMainView.vue'
 import GuestResultView from '@/views/GuestResultView.vue'
 import LoginPageView from '@/views/LoginPageView.vue'
+import PaymentView from '@/views/PaymentView.vue'
 
 
 
@@ -14,7 +15,8 @@ const routes = [
     { path: '/menu', component: MenuListView },
     { path: '/result', component: GuestResultView, name: 'result'  },
     { path: '/admin', component: AdminMainView },
-    { path: '/login', component: LoginPageView}
+    { path: '/login', component: LoginPageView},
+    { path: '/pay', component: PaymentView}
   
   ]
   

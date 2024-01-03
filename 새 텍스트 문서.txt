@@ -1,0 +1,18 @@
+일단 0102 랑 합치고
+
+결제버튼 누르면 payview로 카트데이터랑 같이
+
+payview에는 iframe
+
+payview에서 axios ready
+
+응답이오면 자동으로 iframe이 리다이렉트됨
+
+iframe 잡고 contentwindow.location.href 와치 걸어두기
+
+pgtoken 포함되면
+
+아마 ono잡고 axios?
+
+실패url을 새 뷰 만들어서할까 빠르게 이동되면 필요없고
+
