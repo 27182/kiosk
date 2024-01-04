@@ -9,7 +9,9 @@
         </iframe>
         <div class="notice">
             <h4>
-                테스트용 키로 구현하여 결제하여도 실제 돈은 빠져나가지 않습니다.
+                <div style="border-radius: 25px; background-color: white; padding: 5px 10px; margin-bottom: 3px;">
+                    테스트용 키로 구현하여 결제하여도 실제 돈은 빠져나가지 않습니다.
+                </div>
                 <v-btn text="결제 스킵하기" color="red" @click="skip">
 
                 </v-btn>

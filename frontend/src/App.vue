@@ -2,6 +2,13 @@
     <RouterView/>
 </template>
 
+
+
+<script setup>
+
+
+</script>
+
 <script>
 
 export default {
@@ -29,11 +36,14 @@ body {
   margin: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  background-color: #DDC9BC;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  background-image: url('./assets/backgroundimg.jpg');
 }
 
 body::-webkit-scrollbar {
