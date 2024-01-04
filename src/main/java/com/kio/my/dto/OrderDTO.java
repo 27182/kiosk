@@ -16,6 +16,7 @@ public class OrderDTO {
     private String content;
     private Long totalPrice;
     private String etc;
+    private int isPaid;
 
 
 }

@@ -54,27 +54,35 @@ function gotoPay() {
   }
 
 
-
-  axios.post('/api/order', data
-
-  ).then((res) => {
-    if (res.data.isSuccess) {
-      setTimeout(() => {
-        isWaitingtoPay.value = false;
-        router.push({
-          path: '/result', name: 'result', state: {
-            ono: res.data.ono,
+  router.push({
+          path: '/pay', name: 'pay', state: {
             myCart: cartState,
+            orderData: data
           }
         });
-      }, 1000
-      );
-    } else {
-      alert('오류: 주문 접수 실패');
-      isWaitingtoPay.value = false;
-    }
 
-  })
+
+
+  // axios.post('/api/order', data
+
+  // ).then((res) => {
+  //   if (res.data.isSuccess) {
+  //     setTimeout(() => {
+  //       isWaitingtoPay.value = false;
+  //       router.push({
+  //         path: '/result', name: 'result', state: {
+  //           ono: res.data.ono,
+  //           myCart: cartState,
+  //         }
+  //       });
+  //     }, 1000
+  //     );
+  //   } else {
+  //     alert('오류: 주문 접수 실패');
+  //     isWaitingtoPay.value = false;
+  //   }
+
+  // })
 }
 
 
@@ -98,6 +106,10 @@ onMounted(async () => {
   }
   )
   isLoading.value = false;
+
+  if(history.state.cancelPay != undefined){
+    alert('결제가 취소되었습니다.')
+  }
   
   
 });

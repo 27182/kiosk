@@ -5,13 +5,13 @@ import com.kio.my.domain.Menu;
 import com.kio.my.domain.Ordered;
 import com.kio.my.dto.OrderDTO;
 import com.kio.my.repository.OrderRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 
 import java.util.List;
@@ -44,11 +44,9 @@ public class OrderServiceImpl implements OrderService {
         } else {
             Optional<Ordered> result = orderRepository.findById(orderDTO.getOno());
             ordered = result.get();
-            ordered.changeOneOrder(orderDTO.getContent(),orderDTO.getTotalPrice(),orderDTO.getEtc());
+            ordered.changeOneOrder(orderDTO.getContent(),orderDTO.getTotalPrice(),orderDTO.getEtc(),orderDTO.getIsPaid());
 
         }
-
-        log.info(ordered);
 
         Ordered saved = orderRepository.save(ordered);
         return saved.getOno();

@@ -6,6 +6,7 @@ import com.kio.my.dto.OrderDTO;
 import com.kio.my.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.query.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @Log4j2
@@ -27,7 +29,9 @@ public class OrderController {
 
     public List<Ordered> list(Model model){
 
-         List<Ordered> orderList = orderService.getOrderList();
+         List<Ordered> AllorderList = orderService.getOrderList();
+
+         List<Ordered> orderList = AllorderList.stream().filter(a->a.getIsPaid()==1).collect(Collectors.toList());
 
         return orderList;
 
@@ -42,6 +46,7 @@ public class OrderController {
         Map<Object,Object> result = new HashMap<>();
 
         try {
+            orderDTO.setIsPaid(1);
             ono = orderService.updateOrder(orderDTO);
             result.put("isSuccess",isSuccess);
             result.put("ono", ono);

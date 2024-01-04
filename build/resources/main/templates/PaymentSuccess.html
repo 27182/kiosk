@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div id="test">
+
+</div>
+
+</body>
+</html>
+
+
+<script th:inline="javascript">
+    let order = [[${order}]];
+    let msg = {isSuccess: 'true', ono:order.ono, content:order.content};
+    window.parent.postMessage( msg ,'*')
+</script>
