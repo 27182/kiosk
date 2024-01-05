@@ -21,11 +21,21 @@ export default {
 
 <style>
 #app {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'maple' !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+
+* {
+  font-family: 'maple' !important;
+}
+
+@font-face {
+  font-family: 'maple';
+  src: url('assets/Maplestory-Bold.woff') format('woff');
+}
+
 
 html {
   overflow-x: auto !important;
